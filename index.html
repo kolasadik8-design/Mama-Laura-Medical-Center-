@@ -1,8 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mama Laura HMS</title><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#123D8E"><script src="https://cdn.tailwindcss.com"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script></head><body class="bg-[#123D8E]">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mama Laura HMS V11</title><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#123D8E"><script src="https://cdn.tailwindcss.com"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script></head><body class="bg-[#123D8E]">
 <div id="loginPage" class="min-h-screen flex flex-col items-center justify-center p-4 bg-[#123D8E]">
-<div class="bg-white rounded-[28px] p-8 w-full max-w-md shadow-2xl"><h1 class="text-center text-4xl font-black"><span class="text-[#1AAE4B]">MAMA</span> <span class="text-[#123D8E]">LAURA</span></h1><p class="text-center text-[11px] font-bold tracking-widest mt-1">MEDICAL CLINIC - SSP System</p><input id="em" placeholder="Email" class="w-full mt-8 p-3.5 border-2 border-black rounded-2xl outline-none"><input id="pw" type="password" placeholder="Password" class="w-full mt-3 p-3.5 border-2 rounded-2xl outline-none"><button onclick="doLogin()" class="w-full mt-5 bg-[#123D8E] text-white p-4 rounded-2xl font-black text-lg">LOGIN</button><p id="msg" class="text-red-600 text-xs mt-3 text-center"></p></div>
+<div class="bg-white rounded-[28px] p-8 w-full max-w-md shadow-2xl"><h1 class="text-center text-4xl font-black"><span class="text-[#1AAE4B]">MAMA</span> <span class="text-[#123D8E]">LAURA</span></h1><p class="text-center text-[11px] font-bold tracking-widest mt-1">MEDICAL CLINIC - SSP System V11</p><input id="em" placeholder="Email" class="w-full mt-8 p-3.5 border-2 border-black rounded-2xl outline-none"><input id="pw" type="password" placeholder="Password" class="w-full mt-3 p-3.5 border-2 rounded-2xl outline-none"><button onclick="doLogin()" class="w-full mt-5 bg-[#123D8E] text-white p-4 rounded-2xl font-black text-lg">LOGIN</button><p id="msg" class="text-red-600 text-xs mt-3 text-center"></p></div>
 <div class="mt-6 text-center"><p class="text-[13px] font-bold"><span class="text-[#1AAE4B]">Developed</span> <span class="text-white"> by </span> <span class="text-[#1AAE4B]">E-Mutwokil</span> <span class="text-white"> Sadik</span></p></div></div>
-<div id="app" class="hidden"><header class="bg-[#123D8E] text-white p-3 flex justify-between"><div><b>MAMA LAURA HMS</b> <span id="rb" class="bg-[#1AAE4B] text-[10px] px-2 py-1 rounded-full ml-2"></span></div><div><span id="un" class="text-xs"></span> <button onclick="auth.signOut().then(()=>location.reload())" class="bg-white/20 px-3 py-1 rounded text-xs ml-2">Logout</button></div></header>
+<div id="app" class="hidden"><header class="bg-[#123D8E] text-white p-3 flex justify-between items-center"><div><b>MAMA LAURA HMS</b> <span id="rb" class="bg-[#1AAE4B] text-[10px] px-2 py-1 rounded-full ml-2"></span></div><div class="flex items-center gap-2"><span id="un" class="text-xs font-bold"></span> <button onclick="auth.signOut().then(()=>{localStorage.clear(); location.reload();})" class="bg-white/20 px-3 py-1 rounded text-xs ml-2">Logout</button></div></header>
+<!-- Welcome Banner -->
+<div id="welcomeBanner" class="max-w-7xl mx-auto px-3 pt-3"><div class="bg-white rounded-2xl p-4 flex items-center gap-3 shadow"><div class="w-12 h-12 rounded-full bg-[#123D8E] text-white flex items-center justify-center font-black text-lg" id="avatar">ML</div><div><h2 id="welcomeText" class="font-black text-[#123D8E] text-lg"></h2><p id="welcomeSub" class="text-xs text-gray-500"></p></div><div class="ml-auto text-[10px] bg-[#1AAE4B] text-white px-3 py-1 rounded-full" id="welcomeRole"></div></div></div>
 <div class="max-w-7xl mx-auto p-3 grid grid-cols-12 gap-3"><div class="col-span-12 md:col-span-3"><div id="menu" class="bg-white rounded-2xl p-3"></div>
 <div id="financeBox" class="hidden bg-white rounded-2xl p-4 mt-3"><h3 class="font-black text-sm text-[#123D8E]">Finance Admin SSP</h3><select id="pcat" class="w-full mt-2 p-2 border rounded text-xs"><option value="consultation">Consultation Fee</option><option value="lab">Lab Test</option><option value="bed">Bed Rental</option><option value="pharmacy">Pharmacy Drug</option></select><input id="plabel" placeholder="Label" class="w-full mt-2 p-2 border rounded text-xs"><input id="pprice" type="number" placeholder="Price SSP" class="w-full mt-2 p-2 border rounded text-xs"><button onclick="savePrice()" class="w-full mt-2 bg-[#1AAE4B] text-white p-2.5 rounded-xl font-bold text-xs">Save Price SSP</button><div id="plist" class="mt-3 text-[11px]"></div></div></div>
 <div class="col-span-12 md:col-span-9 space-y-3">
@@ -14,7 +16,7 @@
 <div id="p-admin" class="bg-white rounded-2xl p-5 hidden">
 <h2 class="font-black text-[#123D8E] text-lg">6. Finance + Staff Management</h2>
 <div class="mt-5 border-2 border-[#123D8E] rounded-2xl p-4 bg-blue-50/50">
-<h3 class="font-black text-sm text-[#123D8E]">➕ Add New Staff / Doctor (Admin Only)</h3>
+<h3 class="font-black text-sm text-[#123D8E]">➕ Add New Staff / Doctor</h3>
 <div class="grid md:grid-cols-2 gap-2 mt-3">
 <input id="s_name" placeholder="Full Name" class="p-2.5 border-2 rounded-xl text-sm">
 <input id="s_email" placeholder="Email" class="p-2.5 border-2 rounded-xl text-sm">
@@ -34,8 +36,55 @@ const firebaseConfig={apiKey:"AIzaSyBTKKqbrmpF6BoCzN2gK72F9TwQ2YUkR4o",authDomai
 firebase.initializeApp(firebaseConfig);
 const secondaryApp = firebase.initializeApp(firebaseConfig, "SecondaryApp");
 const db=firebase.firestore(),auth=firebase.auth();let me=null;
+// FIX 1: Keep login after refresh
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
-async function doLogin(){try{const c=await auth.signInWithEmailAndPassword(em.value.trim(),pw.value);const d=await db.collection('mama_staff').doc(c.user.uid).get();if(!d.exists){msg.textContent='No staff record - create in Firestore';return;}me={uid:c.user.uid,...d.data()};document.getElementById('loginPage').classList.add('hidden');document.getElementById('app').classList.remove('hidden');un.textContent=me.name;rb.textContent=(me.role+' '+(me.specialty||'')).toUpperCase();buildMenu();loadAll();loadPrices();loadStaffList();}catch(e){msg.textContent=e.message;}}
+function getTitle(role,spec,name){
+  if(role==='doctor') return 'Dr. '+name;
+  if(role==='nurse') return 'Nurse '+name;
+  if(role==='pharmacy') return 'Pharmacist '+name;
+  if(role==='lab') return 'Lab Tech '+name;
+  if(role==='reception') return 'Receptionist '+name;
+  if(role==='admin') return 'Admin '+name;
+  return name;
+}
+function showWelcome(){
+  if(!me) return;
+  const titleName = getTitle(me.role, me.specialty, me.name);
+  document.getElementById('welcomeText').textContent = 'Welcome, '+titleName+'! 👋';
+  document.getElementById('welcomeSub').textContent = 'Role: '+me.role.toUpperCase()+' | Specialty: '+(me.specialty||'General')+' | Today: '+new Date().toLocaleDateString();
+  document.getElementById('welcomeRole').textContent = me.role.toUpperCase();
+  document.getElementById('avatar').textContent = me.name.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+  document.getElementById('un').textContent = titleName;
+  document.getElementById('rb').textContent = (me.role+' '+(me.specialty||'')).toUpperCase();
+}
+async function doLogin(){
+  try{
+    const c=await auth.signInWithEmailAndPassword(em.value.trim(),pw.value);
+    const d=await db.collection('mama_staff').doc(c.user.uid).get();
+    if(!d.exists){msg.textContent='No staff record';return;}
+    me={uid:c.user.uid,...d.data()};
+    afterLogin();
+  }catch(e){msg.textContent=e.message;}
+}
+function afterLogin(){
+  document.getElementById('loginPage').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  showWelcome(); buildMenu(); loadAll(); loadPrices(); loadStaffList();
+}
+// FIX 2: Auto-login on refresh
+auth.onAuthStateChanged(async (user)=>{
+  if(user){
+    if(me) return;
+    try{
+      const d=await db.collection('mama_staff').doc(user.uid).get();
+      if(d.exists){ me={uid:user.uid,...d.data()}; afterLogin(); }
+    }catch(e){ console.log(e); }
+  } else {
+    document.getElementById('loginPage').classList.remove('hidden');
+    document.getElementById('app').classList.add('hidden');
+  }
+});
 function buildMenu(){let h='';if(me.role==='reception'||me.role==='admin')h+=`<button onclick="show('reception')" class="w-full text-left p-3 rounded-xl bg-[#123D8E] text-white font-bold mt-1">📋 Reception</button>`;if(me.role==='doctor'||me.role==='admin')h+=`<button onclick="show('doctor')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 mt-1">🩺 Specialist Agenda</button>`;if(me.role==='lab'||me.role==='admin')h+=`<button onclick="show('lab')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 mt-1">🧪 Lab</button>`;if(me.role==='pharmacy'||me.role==='admin')h+=`<button onclick="show('pharmacy')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 mt-1">💊 Pharmacy</button>`;if(me.role==='nurse'||me.role==='admin')h+=`<button onclick="show('nurse')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 mt-1">👩‍⚕️ Nurse Tasks</button>`;if(me.role==='admin'){h+=`<button onclick="show('admin')" class="w-full text-left p-3 rounded-xl bg-[#1AAE4B] text-white font-bold mt-2">💰 Finance + Staff Admin</button>`;financeBox.classList.remove('hidden');}menu.innerHTML=h;}
 function show(id){['reception','doctor','lab','pharmacy','nurse','admin'].forEach(x=>{const e=document.getElementById('p-'+x);if(e)e.classList.add('hidden');});document.getElementById('p-'+id).classList.remove('hidden');}
 async function savePrice(){const label=plabel.value.trim(),price=parseInt(pprice.value);if(!label||!price)return alert('Enter label & SSP price');await db.collection('mama_prices_ssp').doc(label.toLowerCase().replace(/[^a-z0-9]+/g,'_')).set({category:pcat.value,label,price,currency:'SSP',updatedAt:firebase.firestore.FieldValue.serverTimestamp()});loadPrices();plabel.value='';pprice.value='';}
@@ -54,7 +103,7 @@ async function dispense(id,pid){const drug=document.getElementById('dn_'+id).val
 async function loadNurse(){const s=await db.collection('mama_nurse_tasks').where('status','==','active').limit(25).get();let h='';s.forEach(d=>{const v=d.data();h+=`<div class="border p-3 rounded-xl mt-2 text-sm"><b>${esc(v.patientId)}</b> ${esc(v.task)}<br><button onclick="discharge('${d.id}','${v.patientId}')" class="bg-green-600 text-white px-2 py-1 rounded text-xs mt-2">Discharge</button></div>`;});nq.innerHTML=h||'No active tasks';}
 async function discharge(tid,pid){await db.collection('mama_nurse_tasks').doc(tid).update({status:'discharged',dischargeDate:firebase.firestore.FieldValue.serverTimestamp()});await db.collection('mama_patients').doc(pid).update({status:'discharged'});loadNurse();}
 async function loadAdmin(){const s=await db.collection('mama_patients').orderBy('createdAt','desc').limit(30).get();let h='<table class="w-full text-xs"><tr class="text-gray-400"><td>ID</td><td>Name</td><td>Spec</td><td>Status</td></tr>';s.forEach(d=>{const v=d.data();h+=`<tr class="border-b"><td>${esc(v.id)}</td><td>${esc(v.name)}</td><td>${esc(v.specialty)}</td><td>${esc(v.status)}</td></tr>`;});h+='</table>';aq.innerHTML=h;}
-async function createStaff(){const name=s_name.value.trim(),email=s_email.value.trim(),pass=s_pass.value,role=s_role.value,spec=s_spec.value;if(!name||!email||!pass){s_msg.textContent='❌ Fill all fields';return;}try{s_msg.textContent='Creating... ⏳';const cred=await secondaryApp.auth().createUserWithEmailAndPassword(email,pass);await db.collection('mama_staff').doc(cred.user.uid).set({name,email,role,specialty:spec,createdBy:me.uid,createdAt:firebase.firestore.FieldValue.serverTimestamp()});await secondaryApp.auth().signOut();s_msg.textContent='✅ '+name+' created! Can login now with '+email;s_name.value='';s_email.value='';s_pass.value='';loadStaffList();}catch(e){s_msg.textContent='❌ '+e.message;}}
-async function loadStaffList(){const snap=await db.collection('mama_staff').orderBy('createdAt','desc').limit(20).get();let h='<b class="text-[#123D8E]">Current Staff:</b><div class="mt-2 space-y-1">';snap.forEach(d=>{const v=d.data();h+=`<div class="flex justify-between border-b py-1"><span><b>${esc(v.name)}</b> - ${esc(v.role)} (${esc(v.specialty)})</span><span class="text-gray-500">${esc(v.email)}</span></div>`;});h+='</div>';document.getElementById('staffList').innerHTML=h;}
+async function createStaff(){const name=s_name.value.trim(),email=s_email.value.trim(),pass=s_pass.value,role=s_role.value,spec=s_spec.value;if(!name||!email||!pass){s_msg.textContent='❌ Fill all fields';return;}try{s_msg.textContent='Creating... ⏳';const cred=await secondaryApp.auth().createUserWithEmailAndPassword(email,pass);await db.collection('mama_staff').doc(cred.user.uid).set({name,email,role,specialty:spec,createdBy:me.uid,createdAt:firebase.firestore.FieldValue.serverTimestamp()});await secondaryApp.auth().signOut();s_msg.textContent='✅ '+getTitle(role,spec,name)+' created! Can login now';s_name.value='';s_email.value='';s_pass.value='';loadStaffList();}catch(e){s_msg.textContent='❌ '+e.message;}}
+async function loadStaffList(){const snap=await db.collection('mama_staff').orderBy('createdAt','desc').limit(20).get();let h='<b class="text-[#123D8E]">Current Staff:</b><div class="mt-2 space-y-1">';snap.forEach(d=>{const v=d.data();h+=`<div class="flex justify-between border-b py-1"><span><b>${esc(getTitle(v.role,v.specialty,v.name))}</b> - ${esc(v.role)} (${esc(v.specialty)})</span><span class="text-gray-500">${esc(v.email)}</span></div>`;});h+='</div>';document.getElementById('staffList').innerHTML=h;}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
 </script></body></html>
