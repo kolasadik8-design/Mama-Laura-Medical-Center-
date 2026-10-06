@@ -10,16 +10,18 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
-<body class="bg-[#eef5ff]">
-<div id="login" class="min-h-screen flex items-center justify-center p-4 bg-[#123D8E]">
-<div class="bg-white rounded-[28px] p-8 w-full max-w-md">
-<h1 class="text-center text-3xl font-black"><span class="text-[#1AAE4B]">MAMA</span> <span class="text-[#123D8E]">LAURA</span></h1>
-<p class="text-center text-[11px] font-bold">MEDICAL CLINIC - SSP System</p>
-<input id="em" placeholder="Email" class="w-full mt-6 p-3 border-2 rounded-xl">
-<input id="pw" type="password" placeholder="Password" class="w-full mt-3 p-3 border-2 rounded-xl">
-<button onclick="login()" class="w-full mt-4 bg-[#123D8E] text-white p-3 rounded-xl font-black">LOGIN</button>
-<p id="msg" class="text-red-600 text-xs mt-2 text-center"></p>
-<div class="mt-4 text-[10px] bg-slate-50 p-2 rounded">admin@mamalaura.com / Admin@2026!</div>
+<body class="bg-[#123D8E]">
+<div id="login" class="min-h-screen flex flex-col items-center justify-center p-4 bg-[#123D8E]">
+<div class="bg-white rounded-[28px] p-8 w-full max-w-md shadow-2xl">
+<h1 class="text-center text-4xl font-black"><span class="text-[#1AAE4B]">MAMA</span> <span class="text-[#123D8E]">LAURA</span></h1>
+<p class="text-center text-[11px] font-bold tracking-widest mt-1">MEDICAL CLINIC - SSP System</p>
+<input id="em" placeholder="Email" class="w-full mt-8 p-3.5 border-2 border-black rounded-2xl outline-none focus:border-[#123D8E]">
+<input id="pw" type="password" placeholder="Password" class="w-full mt-3 p-3.5 border-2 rounded-2xl outline-none focus:border-[#123D8E]">
+<button onclick="login()" class="w-full mt-5 bg-[#123D8E] text-white p-4 rounded-2xl font-black text-lg">LOGIN</button>
+<p id="msg" class="text-red-600 text-xs mt-3 text-center"></p>
+</div>
+<div class="mt-6 text-center">
+<p class="text-[13px] font-bold tracking-wide"><span class="text-[#1AAE4B]">Developed</span> <span class="text-white">by</span> <span class="text-[#1AAE4B]">E-Mutwokil</span> <span class="text-white">Sadik</span></p>
 </div>
 </div>
 
@@ -29,26 +31,28 @@
 <div class="col-span-12 md:col-span-3"><div id="menu" class="bg-white rounded-2xl p-3"></div>
 <div id="financeBox" class="hidden bg-white rounded-2xl p-4 mt-3">
 <h3 class="font-black text-sm text-[#123D8E]">Finance Admin - SSP Price Control</h3>
-<select id="pcat" class="w-full mt-2 p-2 border rounded text-xs"><option value="consultation">Consultation Fee - Per Specialist</option><option value="lab">Lab Test - Per Disease</option><option value="bed">Bed Rental - Per Day</option><option value="pharmacy">Pharmacy Drug</option></select>
-<input id="plabel" placeholder="Label e.g. Pediatrics / Malaria Test / ICU Bed" class="w-full mt-2 p-2 border rounded text-xs">
-<input id="pprice" type="number" placeholder="Price SSP e.g. 45000" class="w-full mt-2 p-2 border rounded text-xs">
+<select id="pcat" class="w-full mt-2 p-2 border rounded text-xs"><option value="consultation">Consultation Fee</option><option value="lab">Lab Test</option><option value="bed">Bed Rental</option><option value="pharmacy">Pharmacy Drug</option></select>
+<input id="plabel" placeholder="Label" class="w-full mt-2 p-2 border rounded text-xs">
+<input id="pprice" type="number" placeholder="Price SSP" class="w-full mt-2 p-2 border rounded text-xs">
 <button onclick="savePrice()" class="w-full mt-2 bg-[#1AAE4B] text-white p-2.5 rounded-xl font-bold text-xs">Save Price SSP</button>
 <div id="plist" class="mt-3 text-[11px]"></div>
 </div></div>
 <div class="col-span-12 md:col-span-9 space-y-3">
 <div id="p-reception" class="bg-white rounded-2xl p-5"><h2 class="font-black text-[#123D8E]">1. Reception</h2><div class="grid md:grid-cols-5 gap-2 mt-3 text-sm"><input id="pn" placeholder="Patient Name" class="p-2.5 border-2 rounded-xl"><input id="pa" type="number" placeholder="Age" class="p-2.5 border-2 rounded-xl"><select id="pg" class="p-2.5 border-2 rounded-xl"><option>Male</option><option>Female</option></select><select id="ps" class="p-2.5 border-2 rounded-xl"><option value="pediatrics">Pediatrics</option><option value="surgery">Surgery</option><option value="obgyn">OBGYN</option><option value="dermatology">Dermatology</option><option value="general">General</option></select><button onclick="reg()" class="bg-[#1AAE4B] text-white rounded-xl font-bold">Register</button></div><div id="rq" class="mt-4"></div></div>
 <div id="p-doctor" class="bg-white rounded-2xl p-5 hidden"><h2 class="font-black">2. Specialist Agenda</h2><div id="da" class="mt-4"></div></div>
-<div id="p-lab" class="bg-white rounded-2xl p-5 hidden"><h2 class="font-black">3. Lab - Return Result to Doctor</h2><div id="lq" class="mt-4"></div></div>
+<div id="p-lab" class="bg-white rounded-2xl p-5 hidden"><h2 class="font-black">3. Lab</h2><div id="lq" class="mt-4"></div></div>
 <div id="p-pharmacy" class="bg-white rounded-2xl p-5 hidden"><h2 class="font-black">4. Pharmacy - SSP</h2><div id="phq" class="mt-4"></div></div>
-<div id="p-nurse" class="bg-white rounded-2xl p-5 hidden"><h2 class="font-black">5. Nurse Tasks - Admission to Discharge</h2><div id="nq" class="mt-4"></div></div>
-<div id="p-admin" class="bg-white rounded-2xl p-5 hidden"><h2 class="font-black">6. Finance Admin - Full Access</h2><div id="aq" class="mt-4"></div></div>
-</div></div></div>
+<div id="p-nurse" class="bg-white rounded-2xl p-5 hidden"><h2 class="font-black">5. Nurse Tasks</h2><div id="nq" class="mt-4"></div></div>
+<div id="p-admin" class="bg-white rounded-2xl p-5 hidden"><h2 class="font-black">6. Finance Admin</h2><div id="aq" class="mt-4"></div></div>
+</div></div>
+<div class="text-center py-6 text-[12px] font-bold"><span class="text-[#1AAE4B]">Developed</span> <span class="text-white">by</span> <span class="text-[#1AAE4B]">E-Mutwokil</span> <span class="text-white">Sadik</span></div>
+</div>
 
 <script>
 const firebaseConfig = { apiKey: "AIzaSyBTKKqbrmpF6BoCzN2gK72F9TwQ2YUkR4o", authDomain: "mama-laura-medical-cente-1fb61.firebaseapp.com", projectId: "mama-laura-medical-cente-1fb61", storageBucket: "mama-laura-medical-cente-1fb61.firebasestorage.app", messagingSenderId: "850931317131", appId: "1:850931317131:web:e74efd4bd588a52944d78e" };
 firebase.initializeApp(firebaseConfig); const db=firebase.firestore(), auth=firebase.auth(); let me=null;
 function esc(s){ const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
-async function login(){ try{ const c=await auth.signInWithEmailAndPassword(em.value.trim(), pw.value); const d=await db.collection('mama_staff').doc(c.user.uid).get(); if(!d.exists){ msg.textContent='No staff record in mama_staff'; return; } me={uid:c.user.uid,...d.data()}; login.classList.add('hidden'); app.classList.remove('hidden'); un.textContent=me.name; rb.textContent=(me.role+' '+(me.specialty||'')).toUpperCase(); buildMenu(); loadAll(); loadPrices(); }catch(e){ msg.textContent=e.message; } }
+async function login(){ try{ const c=await auth.signInWithEmailAndPassword(em.value.trim(), pw.value); const d=await db.collection('mama_staff').doc(c.user.uid).get(); if(!d.exists){ msg.textContent='No staff record'; return; } me={uid:c.user.uid,...d.data()}; login.classList.add('hidden'); app.classList.remove('hidden'); un.textContent=me.name; rb.textContent=(me.role+' '+(me.specialty||'')).toUpperCase(); buildMenu(); loadAll(); loadPrices(); }catch(e){ msg.textContent=e.message; } }
 function buildMenu(){ let h=''; if(me.role==='reception'||me.role==='admin') h+=`<button onclick="show('reception')" class="w-full text-left p-3 rounded-xl bg-[#123D8E] text-white font-bold mt-1">📋 Reception</button>`; if(me.role==='doctor'||me.role==='admin') h+=`<button onclick="show('doctor')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 mt-1">🩺 Specialist Agenda</button>`; if(me.role==='lab'||me.role==='admin') h+=`<button onclick="show('lab')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 mt-1">🧪 Lab</button>`; if(me.role==='pharmacy'||me.role==='admin') h+=`<button onclick="show('pharmacy')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 mt-1">💊 Pharmacy</button>`; if(me.role==='nurse'||me.role==='admin') h+=`<button onclick="show('nurse')" class="w-full text-left p-3 rounded-xl hover:bg-slate-100 mt-1">👩‍⚕️ Nurse Tasks</button>`; if(me.role==='admin'){ h+=`<button onclick="show('admin')" class="w-full text-left p-3 rounded-xl bg-[#1AAE4B] text-white font-bold mt-2">💰 Finance Admin SSP</button>`; financeBox.classList.remove('hidden'); } menu.innerHTML=h; }
 function show(id){ ['reception','doctor','lab','pharmacy','nurse','admin'].forEach(x=>{ const e=document.getElementById('p-'+x); if(e) e.classList.add('hidden'); }); document.getElementById('p-'+id).classList.remove('hidden'); }
 async function savePrice(){ const label=plabel.value.trim(), price=parseInt(pprice.value); if(!label||!price) return alert('Enter label & SSP price'); await db.collection('mama_prices_ssp').doc(label.toLowerCase().replace(/[^a-z0-9]+/g,'_')).set({category:pcat.value, label, price, currency:'SSP', updatedAt:firebase.firestore.FieldValue.serverTimestamp()}); loadPrices(); plabel.value=''; pprice.value=''; }
